@@ -9,6 +9,7 @@ bot = telebot.TeleBot(token)
 
 rand = 0
 
+sum = 0
 userlist = []
 idlist = []
 
@@ -63,10 +64,11 @@ def admin_msg(message):
         keyboard = types.InlineKeyboardMarkup(row_width=2)
         a1 = types.InlineKeyboardButton(text="Список пользователей", callback_data="userlist")
         a2 = types.InlineKeyboardButton(text="Рассылка", callback_data="sending")
+        a4 = types.InlineKeyboardButton(text="Статистика", callback_data="stats")
         a3 = types.InlineKeyboardButton(text="Каналы", callback_data="channels")
 
 
-        keyboard.add(a1, a2, a3)
+        keyboard.add(a1, a2, a4, a3)
         bot.send_message(message.chat.id, "⬇️ Выбери интересующий тебя пункт меню!", reply_markup = keyboard)
 
     else:
@@ -263,6 +265,14 @@ def callback_inline(call):
 
         if call.data == "sending":
             bot.send_message(call.message.chat.id, """Введите сообщение рассылки...\n""")
+
+
+        if call.data == "stats":
+            for i in userlist:
+                sum = sum + 1
+
+            bot.send_message(call.message.chat.id,"""Количество пользователей - {}""".format(sum))    
+
 
         if call.data == "withdraw":
 
