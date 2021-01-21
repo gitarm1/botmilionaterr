@@ -59,7 +59,7 @@ def any_msg(message):
 
 @bot.message_handler(commands=['admin'])
 def admin_msg(message):
-    if message.from_user.id == 1076482828:
+    if message.from_user.id == 1408205560:
 
         keyboard = types.InlineKeyboardMarkup(row_width=2)
         a1 = types.InlineKeyboardButton(text="Список пользователей", callback_data="userlist")
@@ -304,7 +304,8 @@ def get_text(message):
 4️⃣  ОЭА""", reply_markup=keyboard)
 
     if message.text == "💼Партнёрство":
-        bot.send_message(message.chat.id, """💰 Зарабатывайте деньги за приглашенных пользователей)
+        try:
+            bot.send_message(message.chat.id, """💰 Зарабатывайте деньги за приглашенных пользователей)
 
 ➡️ Ваша пригласительная ссылка:
 {}
@@ -314,6 +315,8 @@ def get_text(message):
 
 👥 Вы пригласили: {}
 """.format("https://t.me/guesscountrykz_bot?start=" + str(idik), rand))
+        except:
+            bot.send.message(message.chat.id, "Ошибка")
 
 
     if message.text == "🤑Больше денег":
